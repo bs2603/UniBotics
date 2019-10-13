@@ -1,0 +1,43 @@
+import threading
+import time
+import math
+import cv2
+import numpy as np
+from datetime import datetime
+
+from interfaces.motors import PublisherMotors
+from follow_line import FollowLine
+from printer import printImage
+time_cycle = 80
+
+%matplotlib inline
+fl = FollowLine()
+fl.play()
+Minred = np.array([0,235,60])
+Maxred = np.array([180,255,255])
+def execute(self):
+
+    img = self.getImage()
+    hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+    mask = cv2.inRange(hsv, Minred, Maxred)
+    #plt.imshow(mask)
+    #plt.show()
+    self.set_color_image(img)
+    self.set_threshold_image(mask)
+    whites = np.argwhere(mask == 255)
+    try:
+        xm = np.median(whites[:,1]) / mask.shape[1]
+       
+        if(xm < 0.3):
+            self.motors.sendV(2.5)
+            self.motors.sendW(0.9*np.sqrt(0.5 - xm))
+        elif(xm > 0.7):
+            self.motors.sendV(2.5)
+            self.motors.sendW(-0.9* np.sqrt((xm - 0.5)))
+        else:
+            self.motors.sendW(0)
+            self.motors.sendV(4)
+    except:
+        self.motors.sendV(4)
+        pass
+fl.setExecute(execute) 

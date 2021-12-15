@@ -6,6 +6,10 @@ There is a simulation of a world with an arbitary Racetrack, and the task is to 
 The only inputs you can give to the car are linear and angular velocity.
 The only sensory data you got from the car was the image of the road right in front from a camera mounted in front of the car. 
 
-Wensite link for video : https://bs2603.github.io/projects/JDE.html
+Working video - 
+
+[![Watch the video](https://github.com/bs2603/bs2603.github.io/blob/master/assets/img/Unibots.png)](https://raw.githubusercontent.com/bs2603/bs2603.github.io/master/assets/vid/JDE.mp4)
+
+https://raw.githubusercontent.com/bs2603/bs2603.github.io/master/assets/vid/JDE.mp4
 
 You can check the code for this in exercise 1.
